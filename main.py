@@ -201,29 +201,7 @@ def generate_image(prompt):
     return base64.b64decode(b64)
 
 
-def generate_quote(event):
-    examples = "\n".join(f"- {q}" for q in event["quote_examples"])
-    system_prompt = (
-        "Du schreibst kurze, punchy deutsche Instagram-Sprueche fuer eine "
-        "Survival/Airsoft-Eventreihe namens 'Battlefield for Friends'. "
-        "Maximal 12 Woerter. Kein Hashtag, kein Emoji. Passend zum Stil "
-        "der folgenden Beispiele, aber nicht identisch damit:\n" + examples
-    )
-    resp = requests.post(
-        "https://api.openai.com/v1/chat/completions",
-        headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
-        json={
-            "model": "gpt-4o-mini",
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Thema/Event: {event['name']} - {event['theme']}"},
-            ],
-            "temperature": 0.9,
-        },
-        timeout=60,
-    )
-    resp.raise_for_status()
-    return resp.json()["choices"][0]["message"]["content"].strip().strip('"')
+
 
 
 def build_image_prompt(event, scene):
