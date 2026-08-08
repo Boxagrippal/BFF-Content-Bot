@@ -26,7 +26,7 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 DROPBOX_FOLDER = "/BFF-Content"
 STATE_DROPBOX_PATH = f"{DROPBOX_FOLDER}/state.json"
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENAI_API_KEY = (os.environ.get("OPENAI_API_KEY") or "").strip()
 DROPBOX_APP_KEY = os.environ.get("DROPBOX_APP_KEY")
 DROPBOX_APP_SECRET = os.environ.get("DROPBOX_APP_SECRET")
 DROPBOX_REFRESH_TOKEN = os.environ.get("DROPBOX_REFRESH_TOKEN")
