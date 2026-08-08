@@ -8,7 +8,7 @@ Nutzer weiterhin selbst von Hand.
 
 Laeuft als taeglicher Cron-Job (z.B. via Render.com um 3-4 Uhr nachts).
 """
-
+import re
 import os
 import io
 import json
@@ -178,9 +178,8 @@ def generate_quote(event):
  
     # Sicherheitsnetz: falls das Modell trotzdem mehrere Sprueche oder eine
     # Liste zurueckgibt, nur den ersten, kurzen Teil davon verwenden
-    quote = quote.split("\n")[0].lstrip("-• ").strip()
-    if " - " in quote:
-        quote = quote.split(" - ")[0].strip()
+     quote = quote.split("\n")[0].lstrip("-•– ").strip()
+    quote = re.split(r"\s[-–—]\s", quote)[0].strip()
     words = quote.split()
     if len(words) > 14:
         quote = " ".join(words[:14])
