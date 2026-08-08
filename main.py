@@ -310,7 +310,7 @@ def compose_final_image(raw_image_bytes, quote_text, event_name=None):
         y += line_height
 
     # Fusszeile: Event-Name * Jahr * BATTLEFIELD FOR FRIENDS HQ
-     footer_text = "BATTLEFIELD FOR FRIENDS"
+    footer_text = "BATTLEFIELD FOR FRIENDS"
     fw = draw.textlength(footer_text, font=footer_font)
     fx = (w - fw) / 2
     fy = h - footer_h - int(h * 0.025)
