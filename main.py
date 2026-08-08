@@ -178,7 +178,7 @@ def generate_quote(event):
  
     # Sicherheitsnetz: falls das Modell trotzdem mehrere Sprueche oder eine
     # Liste zurueckgibt, nur den ersten, kurzen Teil davon verwenden
-     quote = quote.split("\n")[0].lstrip("-•– ").strip()
+    quote = quote.split("\n")[0].lstrip("-•– ").strip()
     quote = re.split(r"\s[-–—]\s", quote)[0].strip()
     words = quote.split()
     if len(words) > 14:
