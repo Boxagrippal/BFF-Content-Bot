@@ -49,8 +49,10 @@ def dropbox_get_access_token():
             "refresh_token": DROPBOX_REFRESH_TOKEN,
             "client_id": DROPBOX_APP_KEY,
             "client_secret": DROPBOX_APP_SECRET,
-        },
+      },
     )
+    if resp.status_code != 200:
+        print(resp.text)
     resp.raise_for_status()
     return resp.json()["access_token"]
 
