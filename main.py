@@ -238,48 +238,83 @@ def build_image_prompt(event, scene):
 
 # ---------- Bildkomposition: Logo + Spruch ----------
 
-def compose_final_image(raw_image_bytes, quote_text):
-    img = Image.open(io.BytesIO(raw_image_bytes)).convert("RGB")
-    w, h = img.size
-    draw = ImageDraw.Draw(img)
-
-    # Logo unten rechts einfuegen
-    logo = Image.open(LOGO_PATH).convert("RGBA")
-    logo_w = int(w * 0.22)
-    logo_h = int(logo_w * logo.size[1] / logo.size[0])
-    logo = logo.resize((logo_w, logo_h))
-    img.paste(logo, (w - logo_w - 30, h - logo_h - 30), logo)
-
-    # Spruch unten links, mit Kontur fuer Lesbarkeit
+def _load_font(path, size):
     try:
-        font = ImageFont.truetype("DejaVuSans-Bold.ttf", int(w * 0.045))
+        return ImageFont.truetype(path, size)
     except Exception:
-        font = ImageFont.load_default()
+        return ImageFont.load_default()
 
-    max_width = int(w * 0.65)
-    words = quote_text.split()
-    lines = []
-    current = ""
+
+def _wrap_text(draw, text, font, max_width):
+    words = text.split()
+    lines, current = [], ""
     for word in words:
         test = (current + " " + word).strip()
         if draw.textlength(test, font=font) <= max_width:
             current = test
         else:
-            lines.append(current)
+            if current:
+                lines.append(current)
             current = word
     if current:
         lines.append(current)
+    return lines
 
-    line_height = int(w * 0.06)
+
+def compose_final_image(raw_image_bytes, quote_text, event_name=None):
+    img = Image.open(io.BytesIO(raw_image_bytes)).convert("RGB")
+    w, h = img.size
+    draw = ImageDraw.Draw(img)
+
+    # Logo klein, oben rechts
+    logo = Image.open(LOGO_PATH).convert("RGBA")
+    logo_w = int(w * 0.14)
+    logo_h = int(logo_w * logo.size[1] / logo.size[0])
+    logo = logo.resize((logo_w, logo_h))
+    img.paste(logo, (w - logo_w - 28, 28), logo)
+
+    if not quote_text:
+        out = io.BytesIO()
+        img.save(out, format="JPEG", quality=92)
+        return out.getvalue()
+
+    headline_path = os.path.join(BASE_DIR, "fonts", "BlackOpsOne-Regular.ttf")
+    quote_upper = quote_text.upper()
+    max_width = int(w * 0.86)
+
+    font_size = int(w * 0.078)
+    font = _load_font(headline_path, font_size)
+    lines = _wrap_text(draw, quote_upper, font, max_width)
+
+    # Schrift verkleinern, falls der Spruch trotz Kuerzung zu viele Zeilen braucht
+    while len(lines) > 4 and font_size > int(w * 0.04):
+        font_size -= 4
+        font = _load_font(headline_path, font_size)
+        lines = _wrap_text(draw, quote_upper, font, max_width)
+
+    line_height = int(font_size * 1.3)
+    footer_size = int(w * 0.022)
+    footer_font = _load_font("DejaVuSansMono-Bold.ttf", footer_size)
+    footer_h = int(footer_size * 1.8)
+
     total_text_h = line_height * len(lines)
-    y = h - total_text_h - 40
+    y = h - total_text_h - footer_h - int(h * 0.06)
+
     for line in lines:
-        x = 30
-        # einfache Kontur fuer Lesbarkeit auf jedem Hintergrund
-        for dx, dy in [(-2, 0), (2, 0), (0, -2), (0, 2)]:
+        line_w = draw.textlength(line, font=font)
+        x = (w - line_w) / 2
+        # kraeftige Kontur fuer Lesbarkeit auf jedem Hintergrund
+        for dx, dy in [(-3, 0), (3, 0), (0, -3), (0, 3), (-2, -2), (2, 2), (-2, 2), (2, -2)]:
             draw.text((x + dx, y + dy), line, font=font, fill="black")
-        draw.text((x, y), line, font=font, fill="white")
+        draw.text((x, y), line, font=font, fill="#e9e3cf")
         y += line_height
+
+    # Fusszeile: Event-Name * Jahr * BATTLEFIELD FOR FRIENDS HQ
+     footer_text = "BATTLEFIELD FOR FRIENDS"
+    fw = draw.textlength(footer_text, font=footer_font)
+    fx = (w - fw) / 2
+    fy = h - footer_h - int(h * 0.025)
+    draw.text((fx, fy), footer_text, font=footer_font, fill="#c9c3a8")
 
     out = io.BytesIO()
     img.save(out, format="JPEG", quality=92)
