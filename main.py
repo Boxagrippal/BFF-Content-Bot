@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, "events_config.json")
-LOGO_PATH = os.path.join(BASE_DIR, "logo", "bff-logo.jpg")
+LOGO_PATH = os.path.join(BASE_DIR, "logo", "bff-logo.png")
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 
 DROPBOX_FOLDER = "/BFF-Content"
