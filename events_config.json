@@ -1,0 +1,140 @@
+{
+  "events": [
+    {
+      "key": "deadzone",
+      "name": "Dead Zone",
+      "theme": "Zombie-Survival, Endzeit-Setting, verlassene Stadt, Militär-Ausrüstung",
+      "treatment": "duestere Endzeit-Farbgebung, entsaettigt, kaltes Blau-Grau, leichter Kornfilm, dramatisches Streiflicht",
+      "scenes": [
+        "verlassene Strasse mit umgekippten Autos im Nebel",
+        "Nebel zwischen verfallenen Gebaeuden in der Daemmerung",
+        "einsame Gestalt mit Taschenlampe in einem dunklen Flur",
+        "Gruppe an einer Barrikade in der Abenddaemmerung",
+        "leerer Supermarkt mit umgestuerzten Regalen",
+        "verlassene Tankstelle bei Nacht mit flackerndem Schild"
+      ],
+      "quote_examples": [
+        "Die Stadt schlaeft nicht mehr. Sie wartet.",
+        "Ueberleben ist kein Zufall, es ist eine Entscheidung."
+      ]
+    },
+    {
+      "key": "walkingdead",
+      "name": "Walking Dead",
+      "theme": "post-apokalyptische Wildnis, kleine Gruppe unterwegs, staendige Wachsamkeit",
+      "treatment": "warmes Sepia-Grading, staubig, Sonnenuntergangslicht, leichte Vignette",
+      "scenes": [
+        "ueberwuchertes Feld mit einem alten liegengebliebenen Bus",
+        "Lagerfeuer bei Nacht mitten im Wald",
+        "Gruppe durchsucht vorsichtig eine leere Tankstelle",
+        "verlassene Landstrasse mit umgestuertzten Baeumen",
+        "altes Farmhaus im Abendlicht, Rauch am Horizont",
+        "Gruppe ueberquert eine verrostete Bruecke"
+      ],
+      "quote_examples": [
+        "Wir sind noch hier. Das muss reichen.",
+        "Jeder Tag ist ein Tag mehr, den wir uns verdient haben."
+      ]
+    },
+    {
+      "key": "action",
+      "name": "Action",
+      "theme": "urbane Action-Szene, Tempo, Adrenalin, Team in Bewegung",
+      "treatment": "kontrastreiches Kino-Grading, kraeftige Farben, leichter Blaustich in den Schatten",
+      "scenes": [
+        "Sprung ueber ein Dach zwischen zwei Gebaeuden",
+        "Verfolgungsjagd durch eine enge Gasse",
+        "Fahrzeug durchbricht eine Absperrung",
+        "Gruppe nimmt Deckung hinter Betonblöcken",
+        "Team rennt ueber einen Parkdeck bei Nacht",
+        "Rauchgranate in einer engen Strasse"
+      ],
+      "quote_examples": [
+        "Kein Plan ueberlebt den ersten Kontakt. Wir improvisieren.",
+        "Tempo ist unser bester Schutz."
+      ]
+    },
+    {
+      "key": "modernwarfare",
+      "name": "Modern Warfare",
+      "theme": "taktisches Team, urbaner Nachteinsatz, militaerische Ausruestung",
+      "treatment": "kuehles Nachtgrading, hoher Kontrast, gruenlich-blaue Schatten, leichtes Bildrauschen",
+      "scenes": [
+        "taktisches Team bei Nacht in urbaner Umgebung",
+        "Helikopter im Hintergrund ueber einer zerstoerten Strasse",
+        "neblige, verlassene Strasse mit Strassenlaternen",
+        "Team bewegt sich durch ein zerstoertes Gebaeude",
+        "Kontrollpunkt mit Flutlicht bei Nacht",
+        "Team am Fenster eines verlassenen Hochhauses"
+      ],
+      "quote_examples": [
+        "Bewegung ist Leben. Stillstand ist der Feind.",
+        "Wir sehen sie, bevor sie uns sehen."
+      ]
+    },
+    {
+      "key": "residentevil",
+      "name": "Resident Evil",
+      "theme": "verlassenes Forschungslabor, biologische Bedrohung, klinische Kaelte",
+      "treatment": "gruenstichiges Notlicht-Grading, klinisch kalt, starker Kontrast, leichtes Flackern angedeutet",
+      "scenes": [
+        "verlassenes Forschungslabor mit gruenem Notlicht",
+        "leere Krankenstation mit umgekippten Betten",
+        "unterirdischer Korridor mit Alarmlicht",
+        "Gestalt hinter Glas in einem Quarantaeneraum",
+        "verlassener Serverraum mit blinkenden Konsolen",
+        "Aufzugschacht mit rotem Alarmlicht"
+      ],
+      "quote_examples": [
+        "Was hier passiert ist, sollte niemand ueberleben. Wir schon.",
+        "Die Wahrheit liegt tiefer, als sie zugeben wollen."
+      ]
+    },
+    {
+      "key": "horror",
+      "name": "Horror",
+      "theme": "psychologischer Horror, Isolation, unheimliche Stille",
+      "treatment": "sehr dunkles, entsaettigtes Grading, harte Schatten, koerniger Look, kein Blut oder grafische Gewalt",
+      "scenes": [
+        "dunkler Wald mit einer einzelnen Taschenlampe",
+        "altes Haus mit knarrender Tuer",
+        "leerer, flackernder Flur",
+        "Kinderspielzeug allein in einem verlassenen Zimmer",
+        "Dachboden mit einem einzigen Lichtstrahl",
+        "verlassene Kirche bei Nebel"
+      ],
+      "quote_examples": [
+        "Manche Tueren sollte man einfach nicht oeffnen.",
+        "Die Stille hier ist lauter als jeder Schrei."
+      ]
+    },
+    {
+      "key": "jga",
+      "name": "JGA",
+      "theme": "Action-Setting mit Party- und Aftershow-Charakter, Gruppe feiert zusammen an einem Lost Place",
+      "treatment": "warmes, kraeftiges Kino-Grading wie bei Action, aber mit gemuetlichem Lagerfeuer- oder Partylicht",
+      "scenes": [
+        "Hot Tub an einem Lost Place bei Nacht",
+        "Partyhuette bzw. Cabin mit warmem Licht von innen",
+        "Gruppe haengt zusammen ab, Essen und Getraenke auf dem Tisch",
+        "Lagerfeuerrunde mit Getraenken am Abend",
+        "improvisierte Bar an einem verlassenen Ort",
+        "Gruppe prostet sich vor einem alten Gebaeude zu"
+      ],
+      "quote_examples": [
+        "Letzte Nacht in Freiheit. Wird gefeiert wie ein Einsatz.",
+        "Team zusammen, Glas in der Hand, Mission: Feiern."
+      ]
+    }
+  ],
+  "story_special": {
+    "weekday": 2,
+    "comment": "0=Montag ... 2=Mittwoch. An diesem Wochentag wird statt einem Einzelbild eine 4-teilige Story erzeugt.",
+    "beats": [
+      "Ausgangslage: die Gruppe steht vor einer schweren Entscheidung, Spannung baut sich auf",
+      "Komplikation: die Gruppe wird getrennt, Funkkontakt bricht ab",
+      "Zuspitzung: Munition wird knapp, ein Hilferuf ist zu hoeren, unklar ob Freund oder Falle",
+      "Cliffhanger: letztes Bild, offene Frage an die Follower, wie es weitergehen soll"
+    ]
+  }
+}
