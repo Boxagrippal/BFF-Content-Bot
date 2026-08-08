@@ -142,7 +142,49 @@ def is_story_special_day(config, state):
 
 
 # ---------- OpenAI: Bild & Text ----------
-
+def generate_quote(event):
+    examples = "\n".join(f"- {q}" for q in event["quote_examples"])
+    system_prompt = (
+        "Du schreibst kurze, punchy deutsche Instagram-Sprueche fuer eine "
+        "Survival/Airsoft-Eventreihe namens 'Battlefield for Friends'. "
+        "Antworte AUSSCHLIESSLICH mit genau EINEM einzelnen Spruch, ein "
+        "Satz, maximal 12 Woerter. Kein Aufzaehlungszeichen, kein "
+        "Bindestrich-Trenner, keine Liste, keine Anfuehrungszeichen, kein "
+        "Hashtag, kein Emoji, keine Zeilenumbrueche. Nur der reine "
+        "Spruchtext, sonst nichts.\n\n"
+        "Beispiele aus der Reihe (nur zur Stil-Orientierung, nicht als "
+        "Liste zurueckgeben und nicht kopieren):\n" + examples
+    )
+    resp = requests.post(
+        "https://api.openai.com/v1/chat/completions",
+        headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
+        json={
+            "model": "gpt-4o-mini",
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {
+                    "role": "user",
+                    "content": f"Thema/Event: {event['name']} - {event['theme']}. "
+                    "Gib genau einen Spruch zurueck.",
+                },
+            ],
+            "temperature": 0.9,
+            "max_tokens": 40,
+        },
+        timeout=60,
+    )
+    resp.raise_for_status()
+    quote = resp.json()["choices"][0]["message"]["content"].strip().strip('"')
+ 
+    # Sicherheitsnetz: falls das Modell trotzdem mehrere Sprueche oder eine
+    # Liste zurueckgibt, nur den ersten, kurzen Teil davon verwenden
+    quote = quote.split("\n")[0].lstrip("-• ").strip()
+    if " - " in quote:
+        quote = quote.split(" - ")[0].strip()
+    words = quote.split()
+    if len(words) > 14:
+        quote = " ".join(words[:14])
+    return quote
 def generate_image(prompt):
     resp = requests.post(
         "https://api.openai.com/v1/images/generations",
