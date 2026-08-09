@@ -207,9 +207,16 @@ def generate_image(prompt):
 def build_image_prompt(event, scene):
     return (
         f"{scene}. Stil: {event['theme']}. Bildbehandlung: {event['treatment']}. "
-        "Realistisches, filmisches Foto, keine Personenschaeden, kein Blut, "
-        "keine grafische Gewalt, keine Waffen die direkt auf Personen zielen, "
-        "hochwertige Kinofotografie, dramatisches Licht."
+        "Preisgekroentes Kino-Standbild, wie ein Poster-Motiv fuer einen "
+        "Blockbuster-Actionfilm, ultra-detailliert, scharfe Texturen, "
+        "beeindruckende Tiefenwirkung durch Vorder-, Mittel- und Hintergrund, "
+        "starke Lichtquelle die die Szene dramatisch akzentuiert (z.B. "
+        "Sonnenuntergang, Feuer, Scheinwerfer oder Neonlicht), satte, kraeftige "
+        "Farben statt flaechig dunkler Bildstimmung, dynamische Kamera-Perspektive "
+        "(leichte Untersicht oder Weitwinkel), Gefuehl von Bewegung und Spannung, "
+        "fotorealistisch, 8K, wie von einem preisgekroenten Fotografen, "
+        "keine Personenschaeden, kein Blut, keine grafische Gewalt, keine "
+        "Waffen die direkt auf Personen zielen."
     )
 
 
