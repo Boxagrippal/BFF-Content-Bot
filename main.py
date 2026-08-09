@@ -278,7 +278,7 @@ def compose_final_image(raw_image_bytes, quote_text, event_name=None):
         img.save(out, format="JPEG", quality=92)
         return out.getvalue()
 
-    font_path = os.path.join(BASE_DIR, "fonts", "ArmyRust.ttf")
+    font_path = os.path.join(BASE_DIR, "fonts", "army-rust.ttf")
 
     # Spruch in Einleitungszeile (klein) + Kernaussage (gross) aufteilen,
     # falls ein Doppelpunkt vorhanden ist
