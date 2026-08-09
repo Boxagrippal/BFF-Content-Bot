@@ -278,38 +278,59 @@ def compose_final_image(raw_image_bytes, quote_text, event_name=None):
         img.save(out, format="JPEG", quality=92)
         return out.getvalue()
 
-    headline_path = os.path.join(BASE_DIR, "fonts", "BlackOpsOne-Regular.ttf")
-    quote_upper = quote_text.upper()
+    font_path = os.path.join(BASE_DIR, "fonts", "ArmyRust.ttf")
+
+    # Spruch in Einleitungszeile (klein) + Kernaussage (gross) aufteilen,
+    # falls ein Doppelpunkt vorhanden ist
+    intro_text = ""
+    main_text = quote_text
+    if ":" in quote_text:
+        parts = quote_text.split(":", 1)
+        intro_text = parts[0].strip().upper() + ":"
+        main_text = parts[1].strip()
+
+    quote_upper = main_text.upper()
     max_width = int(w * 0.86)
 
+    intro_size = int(w * 0.032)
+    intro_font = _load_font(font_path, intro_size)
+    intro_lines = _wrap_text(draw, intro_text, intro_font, max_width) if intro_text else []
+
     font_size = int(w * 0.078)
-    font = _load_font(headline_path, font_size)
+    font = _load_font(font_path, font_size)
     lines = _wrap_text(draw, quote_upper, font, max_width)
 
     # Schrift verkleinern, falls der Spruch trotz Kuerzung zu viele Zeilen braucht
     while len(lines) > 4 and font_size > int(w * 0.04):
         font_size -= 4
-        font = _load_font(headline_path, font_size)
+        font = _load_font(font_path, font_size)
         lines = _wrap_text(draw, quote_upper, font, max_width)
 
+    intro_line_height = int(intro_size * 1.3)
     line_height = int(font_size * 1.3)
     footer_size = int(w * 0.022)
     footer_font = _load_font("DejaVuSansMono-Bold.ttf", footer_size)
     footer_h = int(footer_size * 1.8)
 
-    total_text_h = line_height * len(lines)
+    total_text_h = intro_line_height * len(intro_lines) + line_height * len(lines)
     y = h - total_text_h - footer_h - int(h * 0.06)
 
-    for line in lines:
+    def draw_centered_line(line, font, y_pos):
         line_w = draw.textlength(line, font=font)
         x = (w - line_w) / 2
-        # kraeftige Kontur fuer Lesbarkeit auf jedem Hintergrund
         for dx, dy in [(-3, 0), (3, 0), (0, -3), (0, 3), (-2, -2), (2, 2), (-2, 2), (2, -2)]:
-            draw.text((x + dx, y + dy), line, font=font, fill="black")
-        draw.text((x, y), line, font=font, fill="#e9e3cf")
+            draw.text((x + dx, y_pos + dy), line, font=font, fill="black")
+        draw.text((x, y_pos), line, font=font, fill="#e9e3cf")
+
+    for line in intro_lines:
+        draw_centered_line(line, intro_font, y)
+        y += intro_line_height
+
+    for line in lines:
+        draw_centered_line(line, font, y)
         y += line_height
 
-    # Fusszeile: Event-Name * Jahr * BATTLEFIELD FOR FRIENDS HQ
+    # Fusszeile: BATTLEFIELD FOR FRIENDS
     footer_text = "BATTLEFIELD FOR FRIENDS"
     fw = draw.textlength(footer_text, font=footer_font)
     fx = (w - fw) / 2
