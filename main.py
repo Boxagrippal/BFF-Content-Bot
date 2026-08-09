@@ -192,7 +192,7 @@ def generate_image(prompt):
             "model": "gpt-image-1",
             "prompt": prompt,
             "size": "1024x1024",
-            "quality": "medium",
+            "quality": "high",
         },
         timeout=120,
     )
