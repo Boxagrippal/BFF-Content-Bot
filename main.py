@@ -203,20 +203,36 @@ def generate_image(prompt):
 
 
 
+KAMERA_WINKEL = [
+    "Weitwinkel-Establishing-Shot, leichte Untersicht, Szene wirkt gewaltig",
+    "Pull-Back-Reveal-Perspektive, als wuerde die Kamera langsam zurueckfahren und die volle Szene enthuellen",
+    "Nahaufnahme mit Fokus auf Ausruestung und Mimik, Hintergrund leicht unscharf (Bokeh)",
+    "Low-Angle-Heroshot von schraeg unten, die Figur wirkt ueberlebensgross",
+    "Over-the-Shoulder-Perspektive, Blick ueber die Schulter der Figur in die Szene hinein",
+    "dynamische, leicht gekippte Diagonalkomposition fuer zusaetzliche Spannung",
+]
 
+REGIE_STIMMUNG = [
+    "cinematisch, gewichtig, wie der Trailer-Moment eines Blockbusters",
+    "energiegeladen, Bewegung eingefroren im Moment maximaler Spannung",
+    "ruhig und bedrohlich, Stille vor dem Sturm",
+    "episch und ehrfurchtgebietend, grosse Kulisse, kleine Figur",
+]
 def build_image_prompt(event, scene):
+    kamera = random.choice(KAMERA_WINKEL)
+    regie = random.choice(REGIE_STIMMUNG)
     return (
         f"{scene}. Stil: {event['theme']}. Bildbehandlung: {event['treatment']}. "
+        f"Kamera: {kamera}. Regie: {regie}. "
         "Preisgekroentes Kino-Standbild, wie ein Poster-Motiv fuer einen "
         "Blockbuster-Actionfilm, ultra-detailliert, scharfe Texturen, "
         "beeindruckende Tiefenwirkung durch Vorder-, Mittel- und Hintergrund, "
         "starke Lichtquelle die die Szene dramatisch akzentuiert (z.B. "
         "Sonnenuntergang, Feuer, Scheinwerfer oder Neonlicht), satte, kraeftige "
-        "Farben statt flaechig dunkler Bildstimmung, dynamische Kamera-Perspektive "
-        "(leichte Untersicht oder Weitwinkel), Gefuehl von Bewegung und Spannung, "
-        "fotorealistisch, 8K, wie von einem preisgekroenten Fotografen, "
-        "keine Personenschaeden, kein Blut, keine grafische Gewalt, keine "
-        "Waffen die direkt auf Personen zielen."
+        "Farben statt flaechig dunkler Bildstimmung, Gefuehl von Bewegung und "
+        "Spannung, fotorealistisch, 8K, wie von einem preisgekroenten "
+        "Fotografen, keine Personenschaeden, kein Blut, keine grafische "
+        "Gewalt, keine Waffen die direkt auf Personen zielen."
     )
 
 
